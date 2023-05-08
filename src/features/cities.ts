@@ -6,13 +6,13 @@ type CitiesState = {
     [key: string]: City;
   };
   loading: boolean;
-  error: string;
+  isError: boolean;
 };
 
 const initialState: CitiesState = {
   cities: {},
   loading: false,
-  error: '',
+  isError: false,
 };
 
 const citiesSlice = createSlice({
@@ -28,8 +28,11 @@ const citiesSlice = createSlice({
     clear: (state) => {
       state.cities = {};
     },
+    setIsError: (state, action: PayloadAction<boolean>) => {
+      state.isError = action.payload;
+    }
   },
 });
 
 export default citiesSlice.reducer;
-export const { add, remove, clear } = citiesSlice.actions;
+export const { add, remove, clear, setIsError } = citiesSlice.actions;

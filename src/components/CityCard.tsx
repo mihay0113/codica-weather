@@ -20,7 +20,7 @@ const CityCard = ({ city }: CityCardProps) => {
   const dispatch = useAppDispatch();
 
   async function updateCity(newCityName: string) {
-    const response = await fetchCities(newCityName);
+    const response = await fetchCities(newCityName, false);
     const data = await response.json();
     console.log(data);
     dispatch(citiesActions.add(data));
@@ -28,7 +28,6 @@ const CityCard = ({ city }: CityCardProps) => {
   }
 
   const handleUpdateWeather = (event: React.FormEvent, name: string) => {
-    // dispatch(citiesActions.update(name));
     updateCity(name);
     event.stopPropagation();
   };
@@ -45,7 +44,7 @@ const CityCard = ({ city }: CityCardProps) => {
         <Typography variant="subtitle1">
           {city.weather[0].description}
         </Typography>
-        <Typography variant="h4">{city.main.temp} ℃</Typography>
+        <Typography variant="h4">{city.main.temp.toFixed(1)} ℃</Typography>
       </CardContent>
       <CardActions>
         <Button onClick={(e) => handleUpdateWeather(e, city.name)}>
