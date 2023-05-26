@@ -22,7 +22,6 @@ const CityCard = ({ city }: CityCardProps) => {
   async function updateCity(newCityName: string) {
     const response = await fetchCities(newCityName, false);
     const data = await response.json();
-    console.log(data);
     dispatch(citiesActions.add(data));
     return data;
   }
@@ -45,6 +44,13 @@ const CityCard = ({ city }: CityCardProps) => {
           {city.weather[0].description}
         </Typography>
         <Typography variant="h4">{city.main.temp.toFixed(1)} ℃</Typography>
+        <Typography>
+          {'Updated: ' + new Date(city.date).toLocaleString("en-US", {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+          })}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button onClick={(e) => handleUpdateWeather(e, city.name)}>

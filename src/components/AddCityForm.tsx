@@ -3,11 +3,14 @@ import { useState } from "react";
 import { useAppDispatch } from '../app/hooks';
 import * as citiesActions from '../features/cities';
 import { fetchCities } from '../services/api';
-
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 export default function addCityForm() {
   const dispatch = useAppDispatch();
   const [newCityName, setNewCityName] = useState('');
+  const { cities } = useSelector((state: RootState) => state.cities);
 
   async function fetchCity(newCityName: string) {
     const response = await fetchCities(newCityName, false);
@@ -49,6 +52,10 @@ export default function addCityForm() {
           Add
         </Button>
       </Stack>
+      {Object.keys(cities).length > 0
+        && <Button sx={{margin: '24px 0'}} onClick={() => dispatch(citiesActions.clear())}>
+          <DeleteSweepIcon />
+        </Button>}
     </form>
   )
 }

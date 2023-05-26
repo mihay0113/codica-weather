@@ -11,21 +11,24 @@ interface CityDetailProps {
 
 const CityDetail = ({ city }: CityDetailProps) => {
   // const dispatch = useAppDispatch();
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState({
+    list: [{ dt_txt: '' }]
+  });
 
   async function fetchCityDetails(newCityName: string) {
     const response = await fetchCities(newCityName, true);
 
     const data = await response.json();
     // dispatch(citiesActions.add(data));
-    console.log(data)
-    return data;
-
+    // console.log(data)
+    setDetails(data);
   }
 
   useEffect(() => {
     fetchCityDetails(city.name);
   }, [])
+
+  console.log(details);
 
   return (
     <>
@@ -35,6 +38,14 @@ const CityDetail = ({ city }: CityDetailProps) => {
       <Typography>Temperature: {city.main.temp.toFixed(1)} &#8451;</Typography>
       <Typography>Humidity: {city.main.humidity}%</Typography>
       <Typography>Pressure: {city.main.pressure} hPa</Typography>
+      {Object.keys(details).length === 5 && details.list.map((hourly) => {
+        <>
+          <Typography>{hourly.dt_txt}1</Typography>
+          <div style={{ border: '1px solid black', height: '50px', width: '200px' }}>
+            <div style={{ height: '100%', width: `${20 / 50 * 100}%`, backgroundColor: '#fbff00' }}></div>
+          </div >
+        </>
+      })}
     </>
   );
 };

@@ -5,10 +5,10 @@ import { useState } from 'react';
 import CityCard from './components/CityCard';
 import CityDetail from './components/CityDetail';
 import ErrorModal from './components/ErrorModal';
+import AddCityForm from './components/AddCityForm';
 import { City } from './types';
 import { useAppDispatch } from './app/hooks';
 import * as citiesActions from './features/cities';
-import AddCityForm from './components/AddCityForm';
 
 function App() {
   const dispatch = useAppDispatch();

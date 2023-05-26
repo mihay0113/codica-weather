@@ -1,6 +1,5 @@
 export async function fetchCities(newCityName: string, isDetalised: boolean) {
   const API = `https://api.openweathermap.org/data/2.5/`;
-  // pro.openweathermap.org/data/2.5/forecast/hourly?
   const APP_ID = '11f318a690a3344c55c1d0514a768fe1';
   const callType = isDetalised ? 'forecast' : 'weather';
   const cnt = isDetalised ? '&cnt=10' : '';

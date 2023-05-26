@@ -1,6 +1,7 @@
 export type City = {
   name: string;
   id: number;
+  date: number;
   weather: [
     {
       description: string;
